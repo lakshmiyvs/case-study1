@@ -1,0 +1,265 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f7f9fc;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #f4a261, #e76f51);
+    color: #fff;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/hero-image.jpg') center/cover no-repeat;
+    height: 60vh;
+}
+.hero-images {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.hero img {
+    max-width: 30%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+.hero img:hover {
+    transform: scale(1.05);
+}
+
+
+/* Table Styling */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4a261;
+    color: #fff;
+    font-weight: 600;
+}
+
+table tbody tr:hover {
+    background-color: #e8f5e9;
+    transition: background-color 0.3s ease;
+}
+
+/* Customer Reviews Section */
+#customer-reviews {
+    background-color: #f7f9fc;
+    padding: 20px;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+#customer-reviews h2 {
+    color: #2a9d8f;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+#customer-reviews p {
+    color: #595b5d;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+#reviewForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#reviewForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#reviewForm input,
+#reviewForm select,
+#reviewForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#reviewForm textarea {
+    resize: vertical;
+}
+
+#reviewForm button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #2a9d8f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#reviewForm button:hover {
+    background-color: #21867a;
+    transform: scale(1.05);
+}
+
+#reviewConfirmation {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+
+/* Buttons */
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #2a9d8f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #21867a;
+    transform: scale(1.05);
+}
+
+/* Forms */
+form {
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input,
+form select,
+form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="checkbox"],
+form input[type="radio"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+form div#additional-services,
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    border: 2px solid red;
+    background-color: #fdd;
+}
+
+#confirmationMessage {
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
+}
+
+/* Footer */
+footer {
+    background: #595b5d;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #cfaa13;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #e5d5d5;
+    text-decoration: underline;
+}
