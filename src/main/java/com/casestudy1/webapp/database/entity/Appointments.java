@@ -15,7 +15,7 @@ public class Appointments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointmentid")
-    private Integer appointmentId;
+    private Integer appointmentid;
 
     //---------One User can have Many Appointments----------
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -24,7 +24,7 @@ public class Appointments {
     private Users user;
 
     @Column(name = "userid")
-    private Integer userId;
+    private Integer userid;
     //-------------------------------------------------------
 
     //---------One Pet can have Many Appointments-----------
@@ -34,7 +34,7 @@ public class Appointments {
     private Pets pet;
 
     @Column(name = "petid")
-    private Integer petId;
+    private Integer petid;
     //-------------------------------------------------------
 
     //---------One Service can have Many Appointments--------
@@ -44,7 +44,7 @@ public class Appointments {
     private Services service;
 
     @Column(name = "serviceid")
-    private Integer serviceId;
+    private Integer serviceid;
     //--------------------------------------------------------
 
     @Column(name = "date", columnDefinition = "VARCHAR(45)")
@@ -62,10 +62,10 @@ public class Appointments {
     @Override
     public String toString() {
         return "Appointments{" +
-                "appointmentId=" + appointmentId +
-                ", userId=" + userId +
-                ", petId=" + petId +
-                ", serviceId=" + serviceId +
+                "appointmentId=" + appointmentid +
+                ", userId=" + userid +
+                ", petId=" + petid +
+                ", serviceId=" + serviceid +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", status='" + status + '\'' +

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PetsDAO extends JpaRepository<Pets, Integer> {
 
-    public List<Pets> findByUserId(int userid);
+    public List<Pets> findByUserid(int userid);
 }

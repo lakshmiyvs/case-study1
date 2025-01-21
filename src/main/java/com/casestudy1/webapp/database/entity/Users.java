@@ -15,7 +15,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")
-    private Integer userId;
+    private Integer userid;
 
     @Column(name = "name", length = 75, nullable = false)
     private String name;
@@ -30,17 +30,17 @@ public class Users {
     private String phone;
 
     @Column(name = "userroleid")
-    private Integer userRoleId;
+    private Integer userRoleid;
 
     @Override
     public String toString() {
         return "Users{" +
-                "userId=" + userId +
+                "userId=" + userid +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", userRoleId=" + userRoleId +
+                ", userRoleId=" + userRoleid +
                 '}';
     }
 

@@ -13,8 +13,8 @@ public class ServicesService {
     @Autowired
     com.casestudy1.webapp.database.dao.ServicesDAO ServicesDAO;
 
-    public Optional<Services> getService(int serviceID) {
-        return ServicesDAO.findById(serviceID);
+    public Optional<Services> getService(int serviceid) {
+        return ServicesDAO.findById(serviceid);
     }
 
     public void addServices(Services services) {

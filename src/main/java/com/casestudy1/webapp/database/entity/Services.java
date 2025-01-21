@@ -15,7 +15,7 @@ public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "serviceid")
-    private Integer serviceId;
+    private Integer serviceid;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
@@ -29,7 +29,7 @@ public class Services {
     @Override
     public String toString() {
         return "Services{" +
-                "serviceId=" + serviceId +
+                "serviceId=" + serviceid +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +

@@ -3,7 +3,11 @@ package com.casestudy1.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 //import javax.servlet.http.HttpSession;
 import com.casestudy1.webapp.database.entity.Appointments;
 import com.casestudy1.webapp.database.entity.Services;
@@ -49,6 +53,8 @@ import jakarta.servlet.http.HttpSession;
 @SessionAttributes("name")
 public class PetsController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PetsController.class);
+
     @Autowired
     PetsService petsService;
 
@@ -79,6 +85,7 @@ public class PetsController {
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public ModelAndView contact(ModelMap model) {
         ModelAndView response = new ModelAndView();
+        LOG.info("Method: contact");
         response.setViewName( "contact");
         return response;
     }
@@ -86,22 +93,23 @@ public class PetsController {
     @GetMapping("/dashboard")
     public ModelAndView dashboard(@RequestParam String name , @RequestParam String password,Model model,HttpSession session) {
         Users users = usersService.geUsersByEmail(name);
+        LOG.info("Method: dashboard");
         ModelAndView response = new ModelAndView();
         if (null!=users && users.getEmail().equals(name) && users.getPassword().equals(password)) {
             model.addAttribute("name", users.getName());
             session.setAttribute("users", users);
             model.addAttribute("name", users.getName());
-            model.addAttribute("userType", users.getUserRoleId());
-            if(0==users.getUserRoleId()) {
+            model.addAttribute("userType", users.getUserRoleid());
+            if(0==users.getUserRoleid()) {
 
-                List<Appointments> appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserId());
+                List<Appointments> appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserid());
                 List<AppointmentDTO> appointmentList = new ArrayList<>();
                 AppointmentDTO appointmentDTO = null;
                 for(Appointments appointments : appointmentsList) {
                     appointmentDTO = new AppointmentDTO();
-                    appointmentDTO.setAppointmentId(appointments.getAppointmentId());
-                    appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetId()).get().getName());
-                    appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceId()).get().getName());
+                    appointmentDTO.setAppointmentId(appointments.getAppointmentid());
+                    appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetid()).get().getName());
+                    appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceid()).get().getName());
                     appointmentDTO.setStatus(appointments.getStatus());
                     appointmentDTO.setDateTime(appointments.getDate());
                     appointmentList.add(appointmentDTO);
@@ -126,18 +134,18 @@ public class PetsController {
         ModelAndView response = new ModelAndView();
         Users users = (Users)session.getAttribute("users");
         model.addAttribute("name", users.getName());
-        model.addAttribute("userType", users.getUserRoleId());
+        model.addAttribute("userType", users.getUserRoleid());
         List<Appointments> appointmentsList= null;
-        if(0==users.getUserRoleId()) {
+        if(0==users.getUserRoleid()) {
 
-            appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserId());
+            appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserid());
             List<AppointmentDTO> appointmentList = new ArrayList<>();
             AppointmentDTO appointmentDTO = null;
             for(Appointments appointments : appointmentsList) {
                 appointmentDTO = new AppointmentDTO();
-                appointmentDTO.setAppointmentId(appointments.getAppointmentId());
-                appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetId()).get().getName());
-                appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceId()).get().getName());
+                appointmentDTO.setAppointmentId(appointments.getAppointmentid());
+                appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetid()).get().getName());
+                appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceid()).get().getName());
                 appointmentDTO.setStatus(appointments.getStatus());
                 appointmentDTO.setDateTime(appointments.getDate());
                 appointmentList.add(appointmentDTO);
@@ -187,7 +195,7 @@ public class PetsController {
         ModelAndView response = new ModelAndView();
         try {
             Users users = (Users)session.getAttribute("users");
-            List<Pets> petList = petsService.getPetByUserId(users.getUserId());
+            List<Pets> petList = petsService.getPetByUserId(users.getUserid());
             List<Services> serviceList = servicesService.getAllService();
             model.addAttribute("petList", petList);
             model.addAttribute("serviceList", serviceList);
@@ -197,7 +205,7 @@ public class PetsController {
             return response;
         }
 
-        response.setViewName("appointments");
+        response.setViewName("appointment");
         return response;
     }
 
@@ -207,12 +215,12 @@ public class PetsController {
         System.out.println("ID>>>>>>>>>>>"+id);
         Users users = (Users)session.getAttribute("users");
         Optional<Appointments> appointment = appointmentService.getAppointmentById(id);
-        List<Pets> petList = petsService.getPetByUserId(users.getUserId());
+        List<Pets> petList = petsService.getPetByUserId(users.getUserid());
         model.addAttribute("petList", petList);
         List<Services> serviceList = servicesService.getAllService();
         model.addAttribute("serviceList", serviceList);
         model.addAttribute("appointment", appointment.get());
-        response.setViewName("appointments");
+        response.setViewName("appointment");
         return response;
 
     }
@@ -222,9 +230,10 @@ public class PetsController {
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute("users") Users users) {
         ModelAndView response = new ModelAndView();
+        users.setUserRoleid(0);
         System.out.println(users.getEmail());
         usersService.addUser(users);
-        response.setViewName("/login");
+        response.setViewName("login");
         return response;
     }
 
@@ -232,27 +241,43 @@ public class PetsController {
     public ModelAndView addpet(@ModelAttribute("pet") Pets pets,HttpSession session,Model model) {
         ModelAndView response = new ModelAndView();
         Users users = (Users)session.getAttribute("users");
-        pets.setUserId(users.getUserId());
-        pets.setPetId(pets.getPetId());
-        model.addAttribute("userType", users.getUserRoleId());
+        pets.setUserid(users.getUserid());
+        pets.setPetid(pets.getPetid());
+        model.addAttribute("userType", users.getUserRoleid());
         petsService.addPet(pets);
 
-        List<Appointments> appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserId());
-        List<AppointmentDTO> appointmentList = new ArrayList<>();
-        AppointmentDTO appointmentDTO = null;
-        for(Appointments appointments : appointmentsList) {
-            appointmentDTO = new AppointmentDTO();
-            appointmentDTO.setAppointmentId(appointments.getAppointmentId());
-            appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetId()).get().getName());
-            appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceId()).get().getName());
-            appointmentDTO.setStatus(appointments.getStatus());
-            appointmentDTO.setDateTime(appointments.getDate());
-            appointmentList.add(appointmentDTO);
+        List<Appointments> appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserid());
+//        List<AppointmentDTO> appointmentList = new ArrayList<>();
+//        AppointmentDTO appointmentDTO = null;
+////        for(Appointments appointments : appointmentsList) {
+////            appointmentDTO = new AppointmentDTO();
+////            appointmentDTO.setAppointmentId(appointments.getAppointmentid());
+////            appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetid()).get().getName());
+////            appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceid()).get().getName());
+////            appointmentDTO.setStatus(appointments.getStatus());
+////            appointmentDTO.setDateTime(appointments.getDate());
+////            appointmentList.add(appointmentDTO);
+//
+//        }
+        List<AppointmentDTO> appointmentList = appointmentsList.stream()
+                .map(appointments -> {
+                    AppointmentDTO appointmentDTO = new AppointmentDTO();
+                    appointmentDTO.setAppointmentId(appointments.getAppointmentid());
+                    appointmentDTO.setPetName(petsService.getByPetId(appointments.getPetid())
+                            .map(pet -> pet.getName())
+                            .orElse("Unknown Pet"));
+                    appointmentDTO.setServiceName(servicesService.getService(appointments.getServiceid())
+                            .map(service -> service.getName())
+                            .orElse("Unknown Service"));
+                    appointmentDTO.setStatus(appointments.getStatus());
+                    appointmentDTO.setDateTime(appointments.getDate());
+                    return appointmentDTO;
+                })
+                .collect(Collectors.toList());
 
-        }
 
         model.addAttribute("appointmentList", appointmentList);
-        response.setViewName("/dashboard");
+        response.setViewName("dashboard");
 
         return response;
 
@@ -263,18 +288,18 @@ public class PetsController {
     public ModelAndView addappointment(@ModelAttribute("appointments") Appointments appointments,HttpSession session,Model model) {
         ModelAndView response = new ModelAndView();
         Users users = (Users)session.getAttribute("users");
-        appointments.setUserId(users.getUserId());
+        appointments.setUserid(users.getUserid());
         appointments.setStatus("Confirmed");
         appointmentService.addAppointment(appointments);
-        model.addAttribute("userType", users.getUserRoleId());
-        List<Appointments> appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserId());
+        model.addAttribute("userType", users.getUserRoleid());
+        List<Appointments> appointmentsList = appointmentService.getAllAppointmentByUserid(users.getUserid());
         List<AppointmentDTO> appointmentList = new ArrayList<>();
         AppointmentDTO appointmentDTO = null;
         for(Appointments appointments1 : appointmentsList) {
             appointmentDTO = new AppointmentDTO();
-            appointmentDTO.setAppointmentId(appointments1.getAppointmentId());
-            appointmentDTO.setPetName(petsService.getByPetId(appointments1.getPetId()).get().getName());
-            appointmentDTO.setServiceName(servicesService.getService(appointments1.getServiceId()).get().getName());
+            appointmentDTO.setAppointmentId(appointments1.getAppointmentid());
+            appointmentDTO.setPetName(petsService.getByPetId(appointments1.getPetid()).get().getName());
+            appointmentDTO.setServiceName(servicesService.getService(appointments1.getServiceid()).get().getName());
             appointmentDTO.setStatus(appointments1.getStatus());
             appointmentDTO.setDateTime(appointments1.getDate());
             appointmentList.add(appointmentDTO);
@@ -282,7 +307,7 @@ public class PetsController {
         }
 
         model.addAttribute("appointmentList", appointmentList);
-        response.setViewName("/dashboard");
+        response.setViewName("dashboard");
         return response;
 
     }

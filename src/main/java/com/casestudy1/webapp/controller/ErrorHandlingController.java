@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class ErrorHandlingController {
 
-    @RequestMapping(value = "/404", method = RequestMethod.GET)
+    @RequestMapping(value = "/505", method = RequestMethod.GET)
     public String showLoginPage(ModelMap model) {
-        return "404";
+        return "505";
     }
 }
 

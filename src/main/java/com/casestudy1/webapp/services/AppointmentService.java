@@ -26,7 +26,7 @@ public class AppointmentService {
     }
 
     public List<Appointments> getAllAppointmentByUserid(int userID) {
-        return appointmentsDAO.findByUserId(userID);
+        return appointmentsDAO.findByUserid(userID);
 
     }
 

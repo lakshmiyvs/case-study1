@@ -15,7 +15,7 @@ public class Pets {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "petid")
-    private Integer petId;
+    private Integer petid;
 
     @Column(name = "name", length = 100, nullable = false)
     private String name;
@@ -36,18 +36,18 @@ public class Pets {
     private Users user;
 
     @Column(name = "userid")
-    private Integer userId;
+    private Integer userid;
     //------------------------------------------------
 
     @Override
     public String toString() {
         return "Pets{" +
-                "petId=" + petId +
+                "petId=" + petid +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", breed='" + breed + '\'' +
                 ", age=" + age +
-                ", userId=" + userId +
+                ", userId=" + userid +
                 '}';
     }
 }

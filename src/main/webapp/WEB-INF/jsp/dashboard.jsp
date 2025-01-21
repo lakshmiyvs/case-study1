@@ -150,7 +150,7 @@
                 <td>${appointment.serviceName}</td>
                 <td>${appointment.dateTime}</td>
                 <td>${appointment.status}</td>
-                <td><a href="/edit appointments/${appointment.appointmentId}">Edit</a></td>
+                <td><a href="/editappointments/${appointment.appointmentId}">Edit</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -192,7 +192,7 @@
                     <td>${service.name}</td>
                     <td>${service.description}</td>
                     <td>${service.price}</td>
-                    <td><a href="/edit services/${service.serviceId}">Edit</a></td>
+                    <td><a href="/editservices/${service.serviceid}">Edit</a></td>
                 </tr>
             </c:forEach>
             </tbody>

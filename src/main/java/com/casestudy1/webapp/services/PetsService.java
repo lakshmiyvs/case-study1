@@ -20,7 +20,7 @@ public class PetsService {
     }
 
     public List<Pets> getPetByUserId(int userid) {
-        return petsDAO.findByUserId(userid);
+        return petsDAO.findByUserid(userid);
 
     }
 
