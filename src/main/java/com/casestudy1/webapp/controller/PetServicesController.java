@@ -4,6 +4,7 @@ import com.casestudy1.webapp.database.entity.Services;
 import com.casestudy1.webapp.services.ServicesService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+//@PreAuthorize("hasAuthority('admin')")
 public class 	PetServicesController {
 
 

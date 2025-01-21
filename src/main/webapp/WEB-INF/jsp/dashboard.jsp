@@ -119,7 +119,7 @@
             <a href="/appointments" class="button-link">Book Appointment</a>
             <a href="/petregistration" class="button-link">Pet Registration</a></div>
         <div align ="right"><a href="/" class="logout-button">
-            <img src="/images/logout-icon.png"  alt="Logout">
+            <img src="/pub/images/logout-icon.png"  alt="Logout">
         </a></div>
     </div>
 
@@ -163,7 +163,7 @@
         <div align ="left" style="margin-left:1%">
             <a href="/petservicepage" class="button-link">Pet Service</a>
             <div align ="right"><a href="/" class="logout-button">
-                <img src="/images/logout-icon.png"  alt="Logout">
+                <img src="/pub/images/logout-icon.png"  alt="Logout">
             </a></div>
         </div>
 

@@ -13,4 +13,16 @@ function showNextImage() {
 // Set interval to automatically change images every 1 second
 setInterval(showNextImage, 1000);
 
-// Optional: add event listeners for manual control of the carousel (e.g., buttons)
+// Display confirmation message
+const confirmationMessage = $("#reviewConfirmation");
+if (confirmationMessage.length) {
+    confirmationMessage.html(
+        `Thank you, ${name}! Your review has been submitted successfully.`
+    );
+    confirmationMessage.removeClass("hidden").show();
+}
+
+// Clear form fields after successful submission
+$("#reviewForm")[0].reset();
+
+
