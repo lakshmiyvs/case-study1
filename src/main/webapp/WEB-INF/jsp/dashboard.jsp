@@ -101,9 +101,9 @@
             padding: 8px; /* Padding inside table cells */
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* Light gray background for even rows */
-        }
+        /*tr:nth-child(even) {*/
+        /*    background-color: #4CAF50; !* Light gray background for even rows *!*/
+        /*}*/
 
     </style>
 </head>

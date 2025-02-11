@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // first we load the user from the database
         Users user = usersService.geUsersByEmail(username);
 
-        // if the user was not found then we get out of here immediately because its a bad login
+        // if the user was not found then we get out of here immediately because it's a bad login
         if (user == null) {
             // this is not good practice to log off usernames
             throw new UsernameNotFoundException("Username '" + username + "' not found in database");

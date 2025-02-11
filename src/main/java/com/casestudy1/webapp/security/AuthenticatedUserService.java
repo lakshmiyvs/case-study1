@@ -27,8 +27,7 @@ public class AuthenticatedUserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    // In a JSP page we can use a simple tag to get the current username  <sec:authentication property="principal.username"/>
-    // this function will return the username of the logged in user
+
     public String getCurrentUsername() {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context != null && context.getAuthentication() != null) {
@@ -45,9 +44,7 @@ public class AuthenticatedUserService {
         }
     }
 
-    // This will be used by almost everyone in the project to get the user_id for the loged in user
-    // you can simplty autowire in the authenticated user service and call this function simialr to DAO call
-    // this function returns null if the user is not looged in and will return a User entity if they are
+
     public Users loadCurrentUser() {
         String username = getCurrentUsername();
         if (username != null) {
@@ -56,7 +53,7 @@ public class AuthenticatedUserService {
         return null;
     }
 
-    // this function will manually log a user in after creating a new user
+
     public void changeLoggedInUsername(HttpSession session, String username, String unencryptedPassword) {
         // reset security principal to be the new user information
         Authentication request = new UsernamePasswordAuthenticationToken(username, unencryptedPassword);
@@ -66,8 +63,7 @@ public class AuthenticatedUserService {
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
     }
 
-    // you may not have a use for this in your project but it is nice to have in this class for feature
-    // completeness .. maybe some day
+
     public boolean isUserInRole(String role) {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context != null && context.getAuthentication() != null) {
@@ -82,7 +78,7 @@ public class AuthenticatedUserService {
         return false;
     }
 
-    // kinda the same function as the tag libraries .. maybe there is no use for it
+
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken) {

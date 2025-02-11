@@ -197,7 +197,7 @@
     }
 
     tr:nth-child(even) {
-      background-color: #f2f2f2; /* Light gray background for even rows */
+      background-color: #E8F5E9; /* Light gray background for even rows */
     }
   </style>
 </head>
